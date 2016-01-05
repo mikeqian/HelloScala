@@ -1,34 +1,44 @@
 package cls
 
-import scala.language.implicitConversions
+import scala.io.StdIn
+
 
 ///http://twitter.github.io/scala_school/zh_cn/advanced-types.html  视界（“类型类”）
 
 
-object FunctionTest3 {
-  def main(args: Array[String]) {
+object FunctionTest3 extends App {
+  override def main(args: Array[String]) {
+    val sc = new java.util.Scanner (System.in)
+    val n = sc.nextInt()
 
-    var words = 'a' to 'z'
+    def isEven = (s:Int)=> s%2==0
 
-
-    implicit def strToInt(x: String) = x.toInt
-
-    class Container[A <% Int] {
-      def addIt(x: A) = 123 + x
+    if (!isEven(n)){
+      println("Weird")
+      return
     }
-    class Container3[A](value: A) {
-      def addIt(implicit evidence: A ) = 123
+    if ( (2<=n && n<=5) || n>20  ){
+      println("Not Weird")
     }
-    class Container34[A](value: A) { def addIt(implicit evidence: A =:= Int) = 123 + value }
-
-
-
-    class Container2[A](value: A) {
-      def addIt(implicit evidence: A =:= Int) = 123 + value
+    if ( (6<=n && n<=20)  ){
+      println("Weird")
     }
-    implicit def intToString222(i: Int) = i.toString
 
-    def bar(msg: String) = println("aslo can use implicit function intToString...result is " + msg)
+
+
+
 
   }
+
+
+  def main3(args: Array[String]) {
+    val sc = new java.util.Scanner(System.in)
+    val m = sc.nextDouble()
+    val t = sc.nextInt()
+    val x = sc.nextInt()
+    val price = m + (m * t) / 100 + (m * x) / 100
+
+    println("The final price of the meal is $" + price.round + ".")
+  }
+
 }

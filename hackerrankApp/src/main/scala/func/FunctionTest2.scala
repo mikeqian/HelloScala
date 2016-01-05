@@ -15,7 +15,6 @@ object FunctionTest2 {
 
     def test1(code: Int) {
       println("start")
-      code
       println("end" +code)
     }
     test1{1}

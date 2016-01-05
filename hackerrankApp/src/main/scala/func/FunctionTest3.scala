@@ -8,8 +8,7 @@ object FunctionTest3 {
 
     //边界
     //def cacophony[T](things: Seq[T]) = things map (_.sound)
-    def biophony[T <: Animal](things: Seq[T]) = things map (_.sound)
-    biophony(Seq(new Chicken, new Bird))
+
     def fibonacci(in: Any): Int = in match {
       case 0 => 0
       case 1 => 1
