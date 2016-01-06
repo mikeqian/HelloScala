@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 使Spring支持自动检测组件，如注解的Controller -->
+    <context:component-scan base-package="com.zhaogang.qes.controller" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+
+    <!-- Activates scanning of @Autowired -->
+    <context:annotation-config/>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="charset" value="UTF-8"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+    <!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL -->
+    <mvc:default-servlet-handler/>
+
+    <!--<import resource="classpath*:app.xml"/>-->
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/statics/img/**"/>
+            <mvc:exclude-mapping path="/statics/js/**"/>
+            <mvc:exclude-mapping path="/statics/css/**"/>
+            <mvc:exclude-mapping path="/statics/fonts/**"/>
+            <bean class="com.zhaogang.kraken.handler.SoaIdempotencyInterceptor"/>
+        </mvc:interceptor>
+
+        <bean class="com.zhaogang.qes.interceptor.ExceptionInterceptor"></bean>
+
+    </mvc:interceptors>
+
+    <bean id="soaAspectBean" class="com.zhaogang.kraken.handler.SoaAspect"/>
+
+
+    <aop:config>
+        <aop:aspect id="soaAspect" ref="soaAspectBean">
+            <aop:pointcut id="zhaogang.soaAspect"
+                          expression="execution(* com.zhaogang.qes.controller.*.*(..))"/>
+            <aop:around pointcut-ref="zhaogang.soaAspect" method="doAround"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
