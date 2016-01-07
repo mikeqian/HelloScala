@@ -17,7 +17,7 @@ import java.util.Date;
 @Service
 public class JobFactory {
 
-    private static String cronConfig   =    ConfigHelper.getProperty("quartz.spider.cron","0 0 */1 * * ? * ");
+    private static String cronConfig = ConfigHelper.getProperty("quartz.spider.cron", "0 0 */1 * * ? * ");
 
     public static void main() {
 
@@ -45,14 +45,12 @@ public class JobFactory {
 
 //		 把作业和触发器注册到任务调度中
             scheduler.scheduleJob(job, trigger);
-
+            scheduler.scheduleJob(JobBuilder.newJob(CarJob.class).build(), trigger);
 //		 启动调度
             scheduler.start();
-
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
