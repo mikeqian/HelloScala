@@ -1,34 +1,56 @@
-package jsonsong.spider.PageProcessor;
+package jsonsong.spider.pageProcessor;
 
-import jsonsong.spider.samples.GithubRepo;
+import com.google.common.collect.Lists;
+import jsonsong.spider.common.TextUtil;
+import jsonsong.spider.entity.Car;
+import jsonsong.spider.common.Constants;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 
 public class AutoHomePageProcessor implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(0);
+    private AtomicLong seed = new AtomicLong(1);
 
-
-    /*
-    http://dealer.autohome.com.cn/frame/spec/18892/310000/310100/0/10/2/10?isPage=1&seriesId=526&isAlading=False
-     */
     @Override
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/\\w+/\\w+)").all());
-        page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/\\w+)").all());
+        List<String> prices = page.getHtml().xpath("//span[@class='font22']/text()").all();
+        List<String> shops = page.getHtml().xpath("dl[@class='dl-list dl-one']//span[@class='fn-left']/a/text()").all();
+        if (prices.size() == 0 || prices.size() != shops.size()) {
+            page.setSkip(true);
+            return;
+        }
 
-        GithubRepo githubRepo = new GithubRepo();
-//        githubRepo.setAuthor(page.getUrl().regex("https://github\\.com/(\\w+)/.*").toString());
-//        githubRepo.setName(page.getHtml().xpath("//h1[@class='entry-title public']/strong/a/text()").toString());
-//        githubRepo.setReadme(page.getHtml().xpath("//div[@id='readme']/tidyText()").toString());
-//        if (githubRepo.getName() == null) {
-//            //skip this page
-//            page.setSkip(true);
-//        } else {
-//            page.putField("repo", githubRepo);
-//        }
+        long pageIndex = seed.incrementAndGet();
+
+        List<String> urls = Lists.newArrayList(String.format(Constants.AUTO_HOME_SEED, pageIndex));
+        page.addTargetRequests(urls);
+
+        ArrayList<Car> cars = new ArrayList<Car>();
+
+        for (String price : prices) {
+            Car car = new Car();
+
+            if (TextUtil.tryParseInt(price)) {
+                car.setPrice(Float.parseFloat(price));
+            }
+
+            cars.add(car);
+        }
+
+        int i = 0;
+        for (String shop : shops) {
+            Car car = cars.get(i++);
+            car.setShopName(shop);
+        }
+
+        page.putField("car", cars);
     }
 
     @Override

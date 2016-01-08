@@ -1,4 +1,4 @@
-package jsonsong.spider.dao.base
+package jsonsong.spider.repository.base
 
 
 import com.mongodb.casbah.{MongoCollection, MongoDB, MongoClientURI, MongoClient}

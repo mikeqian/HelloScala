@@ -1,4 +1,4 @@
-package jsonsong.spider.dao.base
+package jsonsong.spider.repository.base
 
 import com.alibaba.fastjson.JSON
 import com.mongodb.casbah.commons.MongoDBObject

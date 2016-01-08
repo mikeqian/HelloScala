@@ -2,7 +2,7 @@ package jsonsong.spider.Model
 
 import java.util.Date
 
-import jsonsong.spider.dao.base.BaseEntity
+import jsonsong.spider.repository.base.BaseEntity
 
 /**
   * Created by jsons on 2015/12/28.

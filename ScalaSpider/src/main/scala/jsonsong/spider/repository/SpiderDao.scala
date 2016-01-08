@@ -1,8 +1,8 @@
-package jsonsong.spider.dao.bse
+package jsonsong.spider.repository.bse
 
 import com.mongodb.casbah.commons.MongoDBObject
 import jsonsong.spider.Model.SpiderEntity
-import jsonsong.spider.dao.base.{DBFactory, BaseDao}
+import jsonsong.spider.repository.base.{DBFactory, BaseDao}
 import jsonsong.spider.common.GlobalHelper._
 
 /**

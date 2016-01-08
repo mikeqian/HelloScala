@@ -1,6 +1,8 @@
 package jsonsong.spider.job;
 
-import jsonsong.spider.samples.GithubRepoPageProcessor;
+import jsonsong.spider.common.Constants;
+import jsonsong.spider.pageProcessor.AutoHomePageProcessor;
+import jsonsong.spider.pipeline.CarPipeline;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -14,6 +16,8 @@ public class CarJob implements Job {
     public void execute(JobExecutionContext arg0) throws JobExecutionException {
         log.info("Start Car Job");
 
-        Spider.create(new GithubRepoPageProcessor()).addUrl("https://github.com/code4craft").thread(5).run();
+        String startUrl = String.format(Constants.AUTO_HOME_SEED, 1);
+
+        Spider.create(new AutoHomePageProcessor()).addUrl(startUrl).addPipeline(new CarPipeline()).run();
     }
 }
