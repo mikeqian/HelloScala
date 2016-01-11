@@ -2,7 +2,7 @@ package jsonsong.spider.pageProcessor;
 
 import com.google.common.collect.Lists;
 import jsonsong.spider.common.TextUtil;
-import jsonsong.spider.entity.Car;
+import jsonsong.spider.entitis.Car;
 import jsonsong.spider.common.Constants;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
