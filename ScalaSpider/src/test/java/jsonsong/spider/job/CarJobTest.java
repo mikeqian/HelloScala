@@ -1,11 +1,19 @@
 package jsonsong.spider.job;
 
+import jsonsong.spider.base.BaseJunit4Test;
 import org.junit.Test;
 import org.quartz.JobExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class CarJobTest {
+@Component
+public class CarJobTest extends BaseJunit4Test {
+
+    @Autowired
+    private CarJob carJob;
+
     @Test
     public void spiderTest() throws JobExecutionException {
-        new CarJob().execute(null);
+        carJob.execute(null);
     }
 }
