@@ -7,7 +7,7 @@ public class Car {
     private String id;
 
     private String shopName;
-    private double price;
+    private int price;
 
     public String getShopName() {
         return shopName;
@@ -29,7 +29,7 @@ public class Car {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

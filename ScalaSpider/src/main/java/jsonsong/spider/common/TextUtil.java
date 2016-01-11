@@ -4,9 +4,9 @@ public class TextUtil {
     /*
     It's very stupid.
      */
-    public static boolean tryParseInt(String value) {
+    public static boolean tryParseDouble(String value) {
         try {
-            Integer.parseInt(value);
+            Double.parseDouble(value);
             return true;
         } catch (NumberFormatException e) {
             return false;

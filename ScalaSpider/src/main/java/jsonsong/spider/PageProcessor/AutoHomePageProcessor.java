@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import jsonsong.spider.common.TextUtil;
 import jsonsong.spider.entity.Car;
 import jsonsong.spider.common.Constants;
+import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-
+@Component
 public class AutoHomePageProcessor implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(0);
@@ -32,23 +33,21 @@ public class AutoHomePageProcessor implements PageProcessor {
         List<String> urls = Lists.newArrayList(String.format(Constants.AUTO_HOME_SEED, pageIndex));
         page.addTargetRequests(urls);
 
-        ArrayList<Car> cars = new ArrayList<Car>();
+        List<Car> cars = new ArrayList<Car>();
 
+        int i = 0;
         for (String price : prices) {
             Car car = new Car();
+            car.setShopName(shops.get(i));
 
-            if (TextUtil.tryParseInt(price)) {
-                car.setPrice(Float.parseFloat(price));
+            if (TextUtil.tryParseDouble(price)) {
+                car.setPrice((int) (Float.parseFloat(price) * 10000));
             }
 
             cars.add(car);
+            i++;
         }
 
-        int i = 0;
-        for (String shop : shops) {
-            Car car = cars.get(i++);
-            car.setShopName(shop);
-        }
 
         page.putField("car", cars);
     }
