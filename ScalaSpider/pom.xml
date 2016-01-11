@@ -6,6 +6,7 @@
     <artifactId>scala.spider</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -16,6 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <webmagic.version>0.5.2</webmagic.version>
         <junit.version>4.11</junit.version>
+        <maven.test.skip>true</maven.test.skip>
     </properties>
 
     <dependencies>
@@ -92,6 +94,11 @@
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>2.11.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
