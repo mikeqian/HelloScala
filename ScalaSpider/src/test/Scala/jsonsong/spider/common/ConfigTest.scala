@@ -7,8 +7,9 @@ class ConfigTest {
   @Test def Test1 {
 
 
-    val config: Config = ConfigFactory.load("app")
+    val uri = ConfigHelper.getProperty("database.uri","")
 
+    val str = uri ;
 
   }
 }
