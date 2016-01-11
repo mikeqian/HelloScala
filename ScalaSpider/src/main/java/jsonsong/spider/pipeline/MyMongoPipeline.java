@@ -1,7 +1,7 @@
 package jsonsong.spider.pipeline;
 
 import jsonsong.spider.dao.CarRepository;
-import jsonsong.spider.entitis.Car;
+import jsonsong.spider.entity.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
