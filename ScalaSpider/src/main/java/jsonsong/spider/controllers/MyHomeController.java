@@ -25,7 +25,7 @@ public class MyHomeController {
     public String index() {
         String port = env.getProperty("server.port");
         String isinit = env.getProperty("spider.isinit");
-        return "service is run on " +port +" \n isinit:"+isinit +"version : 0.0.2.00002";
+        return "service is run on " +port +" \n isinit:"+isinit +"version : 0.0.2.00003";
     }
 
     @RequestMapping(value = "/publish")
