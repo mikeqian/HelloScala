@@ -1,4 +1,4 @@
-package jsonsong.spider.pageProcessor;
+package jsonsong.spider.processor;
 
 import com.google.common.collect.Lists;
 import jsonsong.spider.common.TextUtil;

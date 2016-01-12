@@ -2,7 +2,7 @@ package jsonsong.spider.job;
 
 import jsonsong.spider.common.CommonUtils;
 import jsonsong.spider.common.Constants;
-import jsonsong.spider.pageProcessor.AutoHomePageProcessor;
+import jsonsong.spider.processor.AutoHomePageProcessor;
 import jsonsong.spider.pipeline.MyMongoPipeline;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
