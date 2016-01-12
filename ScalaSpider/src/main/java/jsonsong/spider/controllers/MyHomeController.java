@@ -33,7 +33,7 @@ public class MyHomeController {
         InputStream in = null;
         try {
             Process pro = Runtime.getRuntime().exec(new String[]{
-                    "  myos  build_spider "});
+                   "myos", " build_spider "});
 
             pro.waitFor();
             in = pro.getInputStream();
