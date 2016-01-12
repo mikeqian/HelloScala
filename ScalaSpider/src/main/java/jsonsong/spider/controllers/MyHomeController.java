@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.Map;
 
@@ -23,6 +27,25 @@ public class MyHomeController {
         String isinit = env.getProperty("spider.isinit");
         return "service is run on " +port +"\n isinit:"+isinit;
     }
+
+    @RequestMapping(value = "/publish")
+    public String publish() {
+        InputStream in = null;
+        try {
+            Process pro = Runtime.getRuntime().exec(new String[]{
+                    "  myos  build_spider "});
+
+            pro.waitFor();
+            in = pro.getInputStream();
+            BufferedReader read = new BufferedReader(new InputStreamReader(in));
+            String result = read.readLine();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
+
     @Autowired
     private Environment env;
 
