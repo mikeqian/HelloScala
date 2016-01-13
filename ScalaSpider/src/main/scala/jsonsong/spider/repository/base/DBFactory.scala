@@ -12,16 +12,19 @@ import jsonsong.spider.common.ConfigHelper
   */
 object DBFactory {
 
-  val uri = ConfigHelper.getProperty("database.uri","")
+  val uri = ConfigHelper.getProperty("database.uri", "")
   //val username = config.getString("database.username")
 
   val mongo = MongoClient(MongoClientURI(uri))
   val db = getDB()
 
 
-  def getDB(dbName: String = ""): MongoDB = dbName match {
-    case dbName.isEmpty => mongo("jsonsong")
-    case _ => mongo(dbName)
+  def getDB(dbName: String = ""): MongoDB = {
+    if (dbName.isEmpty) {
+      mongo("jsonsong")
+    } else {
+      mongo(dbName)
+    }
   }
 
   def getCollection(cnName: String, db: MongoDB = db): MongoCollection = {
@@ -29,7 +32,7 @@ object DBFactory {
   }
 
 
-  def getSpiderDao(  ): BaseDao[SpiderEntity] = {
+  def getSpiderDao(): BaseDao[SpiderEntity] = {
     val cn = getCollection("SpiderEntity")
     new BaseDao[SpiderEntity](cn)
   }
