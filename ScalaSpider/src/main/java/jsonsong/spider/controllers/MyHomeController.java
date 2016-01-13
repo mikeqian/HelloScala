@@ -21,7 +21,7 @@ import java.util.Map;
 @RestController
 public class MyHomeController {
 
-    @RequestMapping(value = "/") 
+    @RequestMapping(value = "/")
     public String index() {
         String port = env.getProperty("server.port");
         String isinit = env.getProperty("spider.isinit");
