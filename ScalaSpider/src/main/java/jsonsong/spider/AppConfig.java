@@ -19,7 +19,7 @@ public class AppConfig {
     public
     @Bean
     MongoDbFactory mongoDbFactory() throws Exception {
-        String uriStr = ConfigHelper.getProperty("database.uri", "mongodb://localhost:27017/jsonsong");
+        String uriStr = ConfigHelper.getProperty("database.uri", "");
         return new SimpleMongoDbFactory(new MongoClientURI(uriStr));
     }
 

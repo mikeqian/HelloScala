@@ -19,7 +19,7 @@ public class SpiderJob implements Job {
     //把要执行的操作，写在execute方法中
     public void execute(JobExecutionContext arg0) throws JobExecutionException {
         log.info("start spider job");
-        Spider spider = ChaosProcessor.createSpider();
-        spider.start();
+       // Spider spider = ChaosProcessor.createSpider();
+       // spider.start();
     }
 }
