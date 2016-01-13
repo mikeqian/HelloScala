@@ -10,6 +10,7 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -38,8 +39,11 @@ public class AutoHomePageProcessor implements PageProcessor {
         int i = 0;
         for (String price : prices) {
             Car car = new Car();
+            car.setBrand("丰田");
+            car.setSeries("卡罗拉");
+            car.setSpecification("2014款 1.6L CVT GL");
             car.setShopName(shops.get(i));
-
+            car.setDate(new Date());
             if (TextUtil.tryParseDouble(price)) {
                 car.setPrice((int) (Float.parseFloat(price) * 10000));
             }
