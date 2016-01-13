@@ -24,3 +24,4 @@ project/plugins/project/
 /ScalaSpider/target
 /ScalaSpider/.idea
 /ScalaSpider/src/main/resources/application.properties
+/ScalaSpider/src/main/resources/application.conf
