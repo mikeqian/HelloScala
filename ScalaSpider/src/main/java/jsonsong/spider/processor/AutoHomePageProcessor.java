@@ -52,7 +52,6 @@ public class AutoHomePageProcessor implements PageProcessor {
             i++;
         }
 
-
         page.putField("car", cars);
     }
 
