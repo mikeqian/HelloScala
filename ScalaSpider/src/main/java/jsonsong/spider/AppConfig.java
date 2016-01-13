@@ -1,6 +1,9 @@
 package jsonsong.spider;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+
+import jsonsong.spider.common.ConfigHelper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,16 +15,12 @@ import org.springframework.stereotype.Component;
 @Configuration
 @Component
 public class AppConfig {
-    @Value("${mongo.host}")
-    private String host;
 
-    @Value("${mongo.port}")
-    private int port;
-
-     public
+    public
     @Bean
     MongoDbFactory mongoDbFactory() throws Exception {
-        return new SimpleMongoDbFactory(new MongoClient(host, port), "spider");
+        String uriStr = ConfigHelper.getProperty("database.uri", "mongodb://localhost:27017/jsonsong");
+        return new SimpleMongoDbFactory(new MongoClientURI(uriStr));
     }
 
     public

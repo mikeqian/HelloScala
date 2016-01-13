@@ -20,7 +20,7 @@ object DBFactory {
 
 
   def getDB(dbName: String = ""): MongoDB = dbName match {
-    case isEmpty => mongo("jsonsong")
+    case dbName.isEmpty => mongo("jsonsong")
     case _ => mongo(dbName)
   }
 
