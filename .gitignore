@@ -25,3 +25,4 @@ project/plugins/project/
 /ScalaSpider/.idea
 /ScalaSpider/src/main/resources/application.properties
 /ScalaSpider/src/main/resources/application.conf
+/LICENSE
