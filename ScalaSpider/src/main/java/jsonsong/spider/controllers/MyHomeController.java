@@ -19,7 +19,7 @@ import java.util.Map;
 
 
 @RestController
-public class MyHomeController {
+public class MyHomeController { 
 
     @RequestMapping(value = "/")
     public String index() {
