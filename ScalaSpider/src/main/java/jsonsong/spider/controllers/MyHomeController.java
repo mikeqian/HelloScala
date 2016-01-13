@@ -21,8 +21,8 @@ import java.util.Map;
 @RestController
 public class MyHomeController {
 
-    @RequestMapping(value = "/")
-    public String index() { 
+    @RequestMapping(value = "/") 
+    public String index() {
         String port = env.getProperty("server.port");
         String isinit = env.getProperty("spider.isinit");
         return "service is run on " +port +" \n isinit:"+isinit +"version : 0.0.2.00005";
