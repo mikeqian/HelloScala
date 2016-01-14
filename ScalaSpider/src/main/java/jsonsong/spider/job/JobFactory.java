@@ -2,14 +2,12 @@ package jsonsong.spider.job;
 
 import jsonsong.spider.common.ConfigHelper;
 import jsonsong.spider.common.Constants;
-import jsonsong.spider.dao.CarRepository;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 public class JobFactory {

@@ -1,7 +1,6 @@
 package jsonsong.spider.pipeline;
 
-import jsonsong.spider.dao.CarRepository;
-import jsonsong.spider.entity.Car;
+import jsonsong.spider.dao.CarDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
@@ -14,7 +13,7 @@ import java.util.Map;
 public class MyMongoPipeline implements Pipeline {
 
     @Autowired
-    private CarRepository carRepository;
+    private CarDao carDao;
 
     @Override
     public void process(ResultItems resultItems, Task task) {
@@ -23,7 +22,7 @@ public class MyMongoPipeline implements Pipeline {
             if (entry.getValue() instanceof Iterable) {
                 Iterable value = (Iterable) entry.getValue();
                 for (Object o : value) {
-                    carRepository.save((Car) o);
+                    carDao.save(o);
                 }
             }
         }
