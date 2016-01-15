@@ -15,13 +15,12 @@ import java.util.TimeZone;
 public class ReportController {
 
     @Autowired
-    private CarDao carRepository;
+    private CarDao carDao;
 
     @RequestMapping(value = "/report/car")
-    public CarResponse GetCarReport() {
+    public CarResponse getCarReport() {
         CarResponse response = new CarResponse();
 
-        TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
         Calendar todayStart = GregorianCalendar.getInstance();
 
         todayStart.add(Calendar.DATE, -1);
@@ -30,7 +29,7 @@ public class ReportController {
         todayStart.add(Calendar.DATE, -1);
         Date startTime = todayStart.getTime();
 
-        response.setCars(carRepository.getCarByTime(startTime, endTime));
+        response.setCars(carDao.getCarByTime(startTime, endTime));
 
         return response;
     }
