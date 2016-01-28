@@ -30,17 +30,9 @@ public class JobFactory {
                     .startNow().build();
             scheduler.scheduleJob(job, trigger);
 
-            scheduler.scheduleJob(JobBuilder.newJob(CarJob.class).build(), getCarTrigger());
-
             scheduler.start();
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-    }
-
-    private static Trigger getCarTrigger() {
-        return TriggerBuilder.newTrigger().withIdentity("carTrigger", "carTriggerGroup")
-                .withSchedule(CronScheduleBuilder.cronSchedule(Constants.AUTO_HOME_CORN))
-                .startNow().build();
     }
 }
