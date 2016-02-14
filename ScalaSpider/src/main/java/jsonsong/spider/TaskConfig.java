@@ -15,7 +15,7 @@ public class TaskConfig {
     @Autowired
     private CarJob carJob;
 
-    @Scheduled(cron = "0 0 2 * * ? *")
+    @Scheduled(cron = "0 0 2 * * ?")
     public void reportCurrentByCron() {
         carJob.execute();
     }
